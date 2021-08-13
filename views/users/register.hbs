@@ -1,0 +1,32 @@
+{{#if errorMessage}}
+<section style="background-color:#F08080; padding: 1%; border-radius: 6px; width: 50%; margin: 0 auto; margin-top: 5%;">
+    <p style="text-align: center; font-style: italic; font-size: 18px;"> {{errorMessage}} </p>
+</section>
+{{/if}}
+
+<section class="py-5">
+    <div class="container">
+        <h1 style="margin: 2%; text-align: center;">Register</h1>
+        <div style="padding: 5%;">
+            <form action="/user/register" method="POST">
+                <div class="form-group">
+                    <label for="email">Username</label>
+                    <input type="text" name="username" class="form-control" id="username" aria-describedby="username" value="{{username}}"
+                        placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="rePassword">Re-Password</label>
+                    <input type="password" name="rePassword" class="form-control" id="rePassword" placeholder="Re-Password">
+                </div>
+                <div class="form-group">
+                    <p>Already have account? <a href="/user/login">Login Now!</a></p>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>

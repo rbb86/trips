@@ -1,0 +1,20 @@
+#trips-table{
+    display: flex; 
+    flex-wrap:wrap; 
+    width: 100%;
+}
+
+#trips-table span {
+    flex-grow: 1;
+    flex-basis: 130px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.trips-list {
+    padding: 32px;
+}
+
+.trips-list > div:nth-child(even){
+    background-color: rgb(221, 221, 221);
+}
