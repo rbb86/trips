@@ -47,6 +47,8 @@ module.exports = {
                 if(!trip.isOwner && !trip.isComing && trip.seats <1 ) {
                     trip.noSeats = true
                 }
+
+                
                 res.render('./trips/details-trip.hbs', {
                     isLoggedIn: res.locals.user ? true : false,
                     username: res.locals.user ? res.locals.user : null,
@@ -93,7 +95,6 @@ module.exports = {
             then(x => x.json()).
             then(trip => {
                 const userIndex = trip.passengers.indexOf(res.locals.user);
-                console.log("userIndex", userIndex)
                 trip.passengers.splice(userIndex,1)
                 trip.seats = trip.seats + 1;
 

@@ -2,6 +2,7 @@
     display: flex; 
     flex-wrap:wrap; 
     width: 100%;
+    height: 1.8em;
 }
 
 #trips-table span {
