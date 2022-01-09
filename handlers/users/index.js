@@ -1,5 +1,4 @@
 const fetch = require("node-fetch");
-const User = require('./User')
 const jwt = require('../../utils/jwt')
 const {
     cookie

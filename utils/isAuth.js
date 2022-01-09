@@ -1,5 +1,4 @@
 const jwt = require ('./jwt')
-const User = require('../handlers/users/User')
 const { cookie } = require('../config/config')
 const { default: fetch } = require('node-fetch')
 
@@ -16,13 +15,8 @@ module.exports = (justContinue = false) => {
                 if(userdata.status !== 200){
                     throw new Error('user not logged');
                 }
-
-                // req.locals.user = result.username;
-                // console.log('result ', result)
                 res.locals.user = result.username;
                 res.locals._id = result._id;
-
-                // console.log("result ", result)
                 next()
                 
                 })
