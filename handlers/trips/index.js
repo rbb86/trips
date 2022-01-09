@@ -48,12 +48,10 @@ module.exports = {
                     trip.noSeats = true
                 }
 
-                
                 res.render('./trips/details-trip.hbs', {
                     isLoggedIn: res.locals.user ? true : false,
                     username: res.locals.user ? res.locals.user : null,
                     trip,
-                    // isOwner: req.user.id == trip.isComingc
                 })
             })
 
@@ -129,7 +127,8 @@ module.exports = {
                 seats
             } = req.body;
 
-            console.log(minutes)
+
+            
             fetch(tripsURL, {
                 method: 'POST',
                 headers: {
@@ -150,24 +149,14 @@ module.exports = {
             }).
             then(resTrip => resTrip.json()).
             then(newTrip => {
-                // console.log("created: ", newTrip)
+    
                 res.redirect('/trip/shared-trips')
             }).
 
             catch(e => console.log(e)) //TO DO - something went wrong
 
 
-            // const errors = validationResult(req);
-            // const msgs = errors.array().reduce((acc, curr)=>{
-            //     acc.push(curr.msg)
-            //     return acc
-            // }, [])
-            // const errFields = errors.array().reduce((acc, curr)=>{
-            //     const i = `${curr.param}Error`
-            //     acc[i] = 'errorInput'
-            //     return acc
-            // }, {})
-
+    
 
         }
     }
