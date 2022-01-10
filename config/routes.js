@@ -9,5 +9,7 @@ module.exports = (app) => {
     app.use('/user', router.users)
 
     app.use('/trip', router.trips)
+
+    app.use('/test', router.test)
     
 }

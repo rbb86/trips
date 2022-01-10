@@ -20,7 +20,6 @@ module.exports = {
             res.render('users/register.hbs')
         },
         logout(req, res, next) {
-            // req.user = null;
             res.locals.user = null;
             res.clearCookie(cookie).redirect('/home')
         }
@@ -63,34 +62,14 @@ module.exports = {
 
             })
 
-            // User.findOne({
-            //         email
-            //     })
-            //     .then((user) => {
-            //         return Promise.all([user.passwordMatch(password), user])
-            //     }).then(([match, user]) => {
-            //         if (!match) {
-            //             next() // TODO Add the validator
-            //             return
-            //         }
-
-            //         const token = jwt.crateToken(user);
-
-            //         res.status(201).cookie(cookie, token, {
-            //             maxAge: 3600000
-            //         }).redirect('/home/')
-            //     }).catch(() => {
-            //         res.render('users/login.hbs', {
-            //             errorMessage: "Wrong username or password"
-            //         })
-            //     })
         },
 
         register: async function (req, res) {
             const {
                 username,
                 password,
-                rePassword
+                rePassword,
+                avatar
             } = req.body
 
             if (password !== rePassword) {
@@ -106,7 +85,7 @@ module.exports = {
 
                     if (userSearch.length > 0) {
                         return res.render('users/register.hbs', {
-                            errorMessage: `Username "${username}" is registered`
+                            errorMessage: `Username "${username}" is already used`
                         })
                     }
 
@@ -121,7 +100,8 @@ module.exports = {
 
                         const body = JSON.stringify({
                             username: username,
-                            password: hash
+                            password: hash,
+                            avatar
                         });
 
 
