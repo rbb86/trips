@@ -5,5 +5,3 @@ const isAuth = require('../utils/isAuth')
 router.get('/',  isAuth(true), handler.get.home)
 
 module.exports = router
-
-//2:58

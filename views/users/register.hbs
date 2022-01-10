@@ -23,6 +23,14 @@
                     <input type="password" name="rePassword" class="form-control" id="rePassword" placeholder="Re-Password">
                 </div>
                 <div class="form-group">
+                    <label for="avatar">Prfile picture</label>
+                    <div class="form-control"   >
+                        <input type="file" id="files" />
+                        <img src="https://backendlessappcontent.com/8437C1A8-6541-C39B-FF0B-6D084FB90F00/046A7A56-BEE0-43DA-AA88-BD4185E3DB7D/files/Avatars/default_avatar.jfif" alt="" id='avatar'>
+                        <input type="text" id='avatarInput' name='avatar' >
+                    </div>
+                </div>
+                <div class="form-group">
                     <p>Already have account? <a href="/user/login">Login Now!</a></p>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -30,3 +38,48 @@
         </div>
     </div>
 </section>
+<script src="//api.backendless.com/sdk/js/latest/backendless.js"></script>
+<script>
+
+    var APP_ID = '8437C1A8-6541-C39B-FF0B-6D084FB90F00';
+    var API_KEY = '14CFA036-14E1-426F-BB1B-1F889E2795BF';
+
+    Backendless.initApp(APP_ID, API_KEY);
+
+     document.getElementById('files').addEventListener('change', handleFileSelect, false);
+     const avatarInput = document.getElementById('avatarInput')
+
+    var newFile;
+    function handleFileSelect(evt) {
+        file = evt.target.files[0];
+        if (file !== undefined) {
+            const prefix = Math.floor(10000000 * Math.random()).toString() + '_'
+            newFile = new File([file], prefix + file.name);
+        
+            
+            uploadFileFunc(newFile)}
+    }
+
+    function uploadFileFunc(newF) {
+        var callback = {};
+
+        callback.success = function (result) {
+
+        }
+
+        callback.fault = function (result) {
+            alert("error - " + result.message);
+        }
+
+       Backendless.Files.upload(newF, "Avatars")
+            .then(function (fileURLs) {
+                console.log(fileURLs.fileURL)
+                document.getElementById('avatar').src = fileURLs.fileURL;
+                avatarInput.value = fileURLs.fileURL;
+                
+            })
+            .catch(function (error) {
+                console.log("error - " + error.message);
+            });
+    }
+</script>
