@@ -4,7 +4,8 @@ const { secret } = require('../config/config')
 
 module.exports = {
     crateToken(data) {
-        return jwt.sign({_id: data.objectId, username:data.username}, secret, {expiresIn: '350h'})
+        console.log('From jwt.js: ', data)
+        return jwt.sign({_id: data.objectId, username:data.username, avatar: data.avatar}, secret, {expiresIn: '350h'})
     },
     verifyToken(token) {
         return new Promise((resolve, reject) => {
