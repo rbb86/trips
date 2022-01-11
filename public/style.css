@@ -1,3 +1,13 @@
+body{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.container{
+    flex-grow:1
+}
+
 #files {
     display: block;
     margin-bottom: 10px;
@@ -9,6 +19,17 @@
 
 #avatarInput {
     display: none;
+}
+
+#nav-avatar {
+    height: 2em;
+    border-radius: 40%;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #trips-table{

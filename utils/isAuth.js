@@ -15,8 +15,10 @@ module.exports = (justContinue = false) => {
                 if(userdata.status !== 200){
                     throw new Error('user not logged');
                 }
+
                 res.locals.user = result.username;
                 res.locals._id = result._id;
+                res.locals.avatar = result.avatar
                 next()
                 
                 })
