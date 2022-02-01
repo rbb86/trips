@@ -7,6 +7,7 @@ const {
 const {
     default: fetch
 } = require('node-fetch');
+const getAvatar = require('../../utils/getAvatar')
 let tripURL = "https://api.backendless.com/8437C1A8-6541-C39B-FF0B-6D084FB90F00/046A7A56-BEE0-43DA-AA88-BD4185E3DB7D/data/trips/";
 let tripsURL = "https://api.backendless.com/8437C1A8-6541-C39B-FF0B-6D084FB90F00/046A7A56-BEE0-43DA-AA88-BD4185E3DB7D/data/trips";
 
@@ -31,14 +32,14 @@ module.exports = {
                 username: res.locals.user ? res.locals.user : null
             })
         },
-        detailsTrip(req, res, next) {
+         detailsTrip(req, res, next) {
             const {
                 id
             } = req.params;
 
             fetch(tripURL + id).
             then(x => x.json()).
-            then(trip => {
+            then(async function(trip) {
                 trip.isOwner = trip.driverName === res.locals.user;
                 trip.isComing = trip.passengers.indexOf(res.locals.user) >= 0 ? true : false
                 if(!trip.isOwner && !trip.isComing && trip.seats > 0) {
@@ -47,6 +48,9 @@ module.exports = {
                 if(!trip.isOwner && !trip.isComing && trip.seats <1 ) {
                     trip.noSeats = true
                 }
+
+            const avatarURL = await getAvatar(trip.driverId)
+            trip.avatar = avatarURL;              
 
                 res.render('./trips/details-trip.hbs', {
                     isLoggedIn: res.locals.user ? true : false,

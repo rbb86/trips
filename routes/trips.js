@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const isAuth = require('../utils/isAuth');
 const handler = require('../handlers/trips');
-const validations = require('../utils/validator')
 
 router.get('/shared-trips', isAuth(), handler.get.sharedTrips);
 router.get('/offer-trip', isAuth(), handler.get.offerTrip);
